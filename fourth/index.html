@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>沪杭国际教育新年签</title>
+	<script src="./js/xxRem.js"></script>
+	<script src="./js/zepto.min.js"></script>
+  <link rel='stylesheet' href='./css/common.css' />
+	<link rel='stylesheet' href='./css/animate.css' />
+	<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="Stick__body">
+    <div class="Stick__header f-pr">
+      <img src="./img/logo.png" class="Stick__header-logo" alt="logo">
+      <img src="./img/title.png" class="Stick__header-title" alt="title">
+    </div>
+    <div class="Stick__content">
+      <img src="./img/lian1.png" class="Stick__content-lian1" alt="">
+      <div class="Stick__content-main">
+        <img src="./img/bucket.png" alt="">
+      </div>
+      <img src="./img/lian2.png" class="Stick__content-lian2" alt="">
+    </div>
+    <div class="Stick__foot">
+      <img src="./img/tip1.png" class="Stick__foot-tip" alt="logo">
+      <img src="./img/code.jpg" class="Stick__foot-code" alt="title">
+    </div>
+  </div>
+  <div class="Stick__loading" style="display: none;">
+    <div class="dot-pulse"></div>
+  </div>
+  <script>
+    $(function(){
+      // 摇一摇
+      if(window.DeviceMotionEvent) {
+          var speed = 25;    // 用来判定的加速度阈值，太大了则很难触发
+          var x, y, z, lastX, lastY, lastZ;
+          x = y = z = lastX = lastY = lastZ = 0;
+
+          window.addEventListener('devicemotion', function(event){
+              var acceleration = event.accelerationIncludingGravity;
+              x = acceleration.x;
+              y = acceleration.y;
+              if(Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed) {
+                  // 用户设备摇动了，触发响应操作
+                  // 此处的判断依据是用户设备的加速度大于我们设置的阈值
+                  alert('摇了');
+                  start();
+              }
+              lastX = x;
+              lastY = y;
+          }, false);
+      }
+      
+      // start();
+    })
+    // 开始解签
+    function start() {
+      $('.Stick__loading').show(); // 展示加载
+      createRslt()
+    }
+    // 生成签信息
+    function createRslt(){
+      var query = '';
+      var stick = Math.floor(Math.random() * 8);
+      query = 'type='+stick;
+      setTimeout(function(){
+        $('.Stick__loading').hide();
+        jump2rslt(query)
+      }, 2000) //跳转
+    }
+    // 跳转签页面
+    function jump2rslt(query){
+      window.location = './rslt.html?'+query
+    }
+    // loading
+
+    // 交互逻辑：初始化，摇一摇，要玩跳转中签页
+  </script>
+</body>
+</html>
